@@ -7,11 +7,14 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LikeService {
+
     private final LikeCounterPort counter;
 
-    // TODO: rate-limit, idempotency
-    public long increment(String slug) {
+//    private final RateLimiter limiter;
+//    private final IdempotencyStore idem;
 
+    public long increment(String slug) {
+        // TODO: rate-limit, idempotency
         return counter.incrementAtomic(slug);
     }
 

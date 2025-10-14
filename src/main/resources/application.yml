@@ -3,9 +3,9 @@ spring:
     name: summer
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: myuser
-    password: mypassword
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/app_db}
+    username: ${DB_USER:app}
+    password: ${DB_PASSWORD:mypassword}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -14,6 +14,10 @@ spring:
       pool-name: HikariCP
       max-lifetime: 600000
       connection-timeout: 30000
+    flyway:
+      enabled: true
+      locations: classpath:db/migration
+      baseline-on-migrate: true
 
 #  jpa:
 #    hibernate:

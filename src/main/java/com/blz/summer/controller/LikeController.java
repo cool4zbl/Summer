@@ -11,6 +11,7 @@ import java.util.Map;
 @RequestMapping("/v1/likes")
 @RequiredArgsConstructor
 public class LikeController {
+
     private final LikeService service;
 
     @GetMapping("/{slug}")
@@ -18,7 +19,7 @@ public class LikeController {
         return Map.of("slug", slug, "count", service.get(slug));
     }
 
-    @PostMapping
+    @PostMapping("/{slug}")
     public Map<String, Object> inc(
             @PathVariable String slug,
             @RequestHeader(value="Idempotency-Key", required = false) String idemKey

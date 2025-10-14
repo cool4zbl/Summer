@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://prod-db-server:5432/prod_db}
+    username: ${DB_USER:prod_user}
+    password: ${DB_PASSWORD:prod_password}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+      idle-timeout: 60000
+      pool-name: HikariCP-Prod
+      max-lifetime: 1200000
+      connection-timeout: 20000
