@@ -10,3 +10,14 @@ spring:
       pool-name: HikariCP-Prod
       max-lifetime: 1200000
       connection-timeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health  # Only expose health in prod
+  endpoint:
+    health:
+      # TODO: change to when-authorized when authentication/authorization is properly configured.
+      show-details: never
+      show-components: never

@@ -4,6 +4,7 @@ import com.blz.summer.port.LikeCounterPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.Map;
 
@@ -15,20 +16,25 @@ public class LikeJdbcDao implements LikeCounterPort {
     @Override
     public long incrementAtomic(String slug) {
         String sql = """
-            INSERT INTO likes(slug, count) VALUES (:slug, 1)
+            INSERT INTO likes(slug, like_count) VALUES (:slug, 1)
             ON CONFLICT (slug)
-            DO UPDATE SET count = likes.count + 1, updated_at = now()
-            RETURNING count;
+            DO UPDATE SET like_count = likes.like_count + 1, updated_at = CURRENT_TIMESTAMP
+            RETURNING like_count;
         """;
-        return jdbc.queryForObject(sql, Map.of("slug", slug), Long.class);
+        Long result = jdbc.queryForObject(sql, Map.of("slug", slug), Long.class);
+        return result != null ? result : 0L;
     }
 
     @Override
     public long get(String slug) {
-        return jdbc.queryForObject(
-                "SELECT count FROM likes where slug:=slug",
-                Map.of("slug", slug),
-                Long.class
-        );
+        try {
+            return jdbc.queryForObject(
+                    "SELECT like_count FROM likes WHERE slug = :slug",
+                    Map.of("slug", slug),
+                    Long.class
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return 0L;
+        }
     }
 }
