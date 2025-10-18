@@ -37,21 +37,6 @@ Once the app is running, open:
 - For models/DTOs, annotate classes or fields with `@Schema(description = ..., example = ...)`.
 - To group additional versions, add more `GroupedOpenApi` beans in `OpenApiConfig`.
 
-### Example DTO
-Instead of returning a `Map`, you can define a response class:
-```java
-public record LikeResponse(String slug, long like_count) {}
-```
-Annotate it:
-```java
-@Schema(description = "Represents the like_count for a slug")
-public record LikeResponse(
-  @Schema(description = "Unique slug", example = "article-123") String slug,
-  @Schema(description = "Current like_count", example = "42") long like_count
-) {}
-```
-Then update controller methods to return `LikeResponse` for better schema generation.
-
 ### Customizing Global Settings
 Add properties in `application.yml` if desired:
 ```yaml

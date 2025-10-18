@@ -16,10 +16,10 @@ public class LikeJdbcDao implements LikeCounterPort {
     @Override
     public long incrementAtomic(String slug) {
         String sql = """
-            INSERT INTO likes(slug, like_count) VALUES (:slug, 1)
+            INSERT INTO post_likes(slug, likes) VALUES (:slug, 1)
             ON CONFLICT (slug)
-            DO UPDATE SET like_count = likes.like_count + 1, updated_at = CURRENT_TIMESTAMP
-            RETURNING like_count;
+            DO UPDATE SET likes = post_likes.likes + 1
+            RETURNING likes;
         """;
         Long result = jdbc.queryForObject(sql, Map.of("slug", slug), Long.class);
         return result != null ? result : 0L;
@@ -29,7 +29,7 @@ public class LikeJdbcDao implements LikeCounterPort {
     public long get(String slug) {
         try {
             return jdbc.queryForObject(
-                    "SELECT like_count FROM likes WHERE slug = :slug",
+                    "SELECT likes FROM post_likes WHERE slug = :slug",
                     Map.of("slug", slug),
                     Long.class
             );

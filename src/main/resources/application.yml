@@ -50,3 +50,8 @@ springdoc:
     operationsSorter: method
     tagsSorter: alpha
 
+logging:
+    level:
+        root: INFO
+        org.springframework.web: DEBUG
+        com.blz.summer: DEBUG
