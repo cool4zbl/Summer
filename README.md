@@ -1,17 +1,18 @@
 # Summer Project
 
-"Summer Project" is the backend app for my [personal website](htts://binliuzhang.com), as well as a sample project demonstrating how to build a Spring Boot application with Postgres, Docker, and Swagger/OpenAPI documentation.
+"Summer Project" is the backend app for [my personal website](https://binliuzhang.com), as well as a sample project demonstrating how to build a Spring Boot application with Postgres, Docker, and Swagger/OpenAPI documentation.
 
 ## Features
 ### Post Likes
 - RESTful API for managing posts likes, including:
-  - Like a post (up to 20 times per user).
-  - Retrieve total likes for a post.
-- Thread-safe operations to handle concurrent likes.
+    - Like a post (up to 20 times per user).
+    - Retrieve total likes for a post.
+    - Thread-safe operations to handle concurrent likes.
 
 
 ## Tools & Technologies
-- Spring Boot application with Postgres database.
+- Spring Boot application using Java 21.
+- Data persistence using Postgres.
 - Flyway for database migrations.
 - Swagger / OpenAPI documentation using springdoc.
 - Docker Compose setup for easy local development.
