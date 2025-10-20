@@ -1,14 +1,12 @@
 package com.blz.summer.controller;
 
-import com.blz.summer.LikeResponse;
+import com.blz.summer.dto.LikeResponse;
 import com.blz.summer.service.LikeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/likes")
