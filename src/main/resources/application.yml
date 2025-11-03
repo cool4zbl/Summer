@@ -19,6 +19,10 @@ spring:
       locations: classpath:db/migration
       baseline-on-migrate: true
 
+  web:
+    resources:
+      add-mappings: false
+
 #  jpa:
 #    hibernate:
 #      ddl-auto: update
@@ -32,12 +36,12 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health
       base-path: /actuator
   endpoint:
     health:
-      show-details: always
-      show-components: always
+      show-details: when_authorized
+      show-components: when_authorized
   health:
     db:
       enabled: true
@@ -51,7 +55,7 @@ springdoc:
     tagsSorter: alpha
 
 logging:
-    level:
-        root: INFO
-        org.springframework.web: DEBUG
-        com.blz.summer: DEBUG
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.blz.summer: INFO
