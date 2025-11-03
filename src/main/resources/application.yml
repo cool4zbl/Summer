@@ -14,10 +14,14 @@ spring:
       pool-name: HikariCP
       max-lifetime: 600000
       connection-timeout: 30000
-    flyway:
-      enabled: true
-      locations: classpath:db/migration
-      baseline-on-migrate: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  web:
+    resources:
+      add-mappings: false
 
 #  jpa:
 #    hibernate:
@@ -29,10 +33,13 @@ spring:
 
 # Actuator health check configuration
 management:
+  server:
+    port: ${MANAGEMENT_SERVER_PORT:${SERVER_PORT:8080}}
+    address: ${MANAGEMENT_SERVER_ADDRESS:0.0.0.0}
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health
       base-path: /actuator
   endpoint:
     health:
